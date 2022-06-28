@@ -38,12 +38,3 @@ jobs:
       - name: Build Image
         run: |
           docker buildx build --push --platform linux/amd64,linux/arm64 -t mmdjiji/bert-chinese-idioms:latest -t mmdjiji/bert-chinese-idioms:${{ github.ref_name }} .
-
-      - name: Docker Hub Description
-        uses: peter-evans/dockerhub-description@v3
-        with:
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-          repository: peterevans/dockerhub-description
-          readme-filepath: ./README.md
-          short-description: ${{ github.event.repository.description }}

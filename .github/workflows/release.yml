@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+  build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Image
+        run: |
+          docker build . -t mmdjiji/bert-chinese-idioms:${{ github.ref }}
+      - name: Login to Registry
+        run: docker login --username=${{ secrets.REGISTRY_USERNAME }} --password ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Push Image
+        run: |
+          docker push mmdjiji/bert-chinese-idioms:${{ github.ref }}

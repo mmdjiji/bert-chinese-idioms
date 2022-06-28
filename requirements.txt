@@ -1,0 +1,5 @@
+Django==4.0.5
+torch==1.11.0
+transformers==4.20.1
+datasets==2.3.2
+tzdata==2022.1

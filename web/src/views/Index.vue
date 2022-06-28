@@ -24,8 +24,8 @@ export default {
   },
   methods: {
     defvalue() {
-      this.sentence = '今天的天气[MASK]';
-      this.candidates = '乘风破浪,万里无云,落花流水,天网恢恢'
+      this.sentence = '国足真是受了[MASK]！';
+      this.candidates = '乘风破浪,落花流水,奇耻大辱,天网恢恢'
     },
     fillin() {
       if(!this.sentence || !this.candidates) {

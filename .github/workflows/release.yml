@@ -19,14 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build Image
-        run: |
-          docker build . -t mmdjiji/bert-chinese-idioms:latest,${{ github.ref_name }}
       - name: Login to Registry
         run: docker login --username=${{ secrets.REGISTRY_USERNAME }} --password ${{ secrets.REGISTRY_PASSWORD }}
-      - name: Push Image
+      - name: Build Image
         run: |
-          docker push mmdjiji/bert-chinese-idioms:latest,${{ github.ref_name }}
+          docker build --push -t mmdjiji/bert-chinese-idioms:latest -t mmdjiji/bert-chinese-idioms:${{ github.ref_name }} .
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v3
         with:
